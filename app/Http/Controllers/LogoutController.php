@@ -10,6 +10,10 @@ class LogoutController extends Controller
     public function logout(Request $request)
     {
         // Déconnexion de l'utilisateur
+
+        $user = Auth::user();
+        $user->actif = false;
+        $user->save();
         Auth::logout();
 
         // Redirection vers la page de connexion

@@ -31,6 +31,7 @@ class AdminController extends Controller
         $user->password = bcrypt($validatedData['password']);
         $user->anneeEntree = $request->input('anneeEntree');
         $user->nbDeFemmes = $request->input('nbDeFemmes');
+        $user->role = $request->input('role');
         $user->save();
 
         /*$viewData = [];

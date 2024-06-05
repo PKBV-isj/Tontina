@@ -94,59 +94,48 @@
                                   data-bs-dismiss="modal"
                                   aria-label="Close"></button>
                               </div>
-                            <form action="{{ route('admin.add') }}" method="POST" enctype="multipart/form-data" >
+                              <form action="{{ route('admin.add') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                              <div class="modal-body">
-                                <div class="row g-2">
-                                  <div class="col mb-3">
-                                    <label for="name" class="form-label">Nom</label>
-                                    <input
-                                      type="text"
-                                      name="nom"
-                                      class="form-control"
-                                      placeholder="Entre le nom" />
-                                  </div>
-                                  <div class="col mb-3">
-                                    <label for="login" class="form-label">Login</label>
-                                    <input
-                                      type="text"
-                                      name="login"
-                                      class="form-control"
-                                      placeholder="Entre son login" />
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col mb-3">
-                                  <label for="password" class="form-label">password</label>
-                                    <input
-                                      type="password"
-                                      name="password"
-                                      class="form-control"
-                                      placeholder="xxxxxxxxx" />
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col mb-0">
-                                    <label for="passwordConfirm" class="form-label">Confirm password</label>
-                                    <input
-                                      type="password"
-                                      name="password1"
-                                      class="form-control"
-                                      placeholder="xxxxxxxxx" />
-                                  </div>
-                                </div>
-                                <div class="row g-2">
-                                  <div class="col mb-3">
-                                    <label for="AnneEntree" class="form-label">Annee Entree</label>
-                                    <input type="date" name="anneeEntree" class="form-control" />
-                                  </div>
-                                  <div class="col mb-3">
-                                    <label for="nbDeFemmes" class="form-label">Nombre de femmes</label>
-                                    <input type="number" name="nbDeFemmes" class="form-control" />
-                                  </div>
-                                </div>
-
-                              </div>
+                                 <div class="modal-body">
+                                    <div class="row g-2">
+                                        <div class="col mb-3">
+                                            <label for="name" class="form-label">Nom</label>
+                                            <input type="text" name="nom" class="form-control" placeholder="Entrez le nom" /> </div>
+                                             <div class="col mb-3">
+                                                 <label for="login" class="form-label">Login</label>
+                                                <input type="text" name="login" class="form-control" placeholder="Entrez le login" />
+                                            </div>
+                                        </div>
+                                         <div class="row g-2"> <div class="col mb-3">
+                                            <label for="password" class="form-label">Mot de passe</label>
+                                            <input type="password" name="password" class="form-control" placeholder="xxxxxxxxx" />
+                                        </div>
+                                        <div class="col mb-3">
+                                            <label for="passwordConfirm" class="form-label">Confirmer le mot de passe</label>
+                                            <input type="password" name="password1" class="form-control" placeholder="xxxxxxxxx" />
+                                        </div>
+                                    </div>
+                                    <div class="row g-2"> <div class="col mb-3">
+                                         <label for="AnneEntree" class="form-label">Année d'entrée</label>
+                                          <input type="date" name="anneeEntree" class="form-control" />
+                                        </div>
+                                        <div class="col mb-3">
+                                            <label for="nbDeFemmes" class="form-label">Nombre de femmes</label>
+                                            <input type="number" name="nbDeFemmes" class="form-control" />
+                                        </div>
+                                    </div>
+                                     <div class="row g-2">
+                                        <div class="col mb-3">
+                                             <label for="role" class="form-label">Rôle</label>
+                                             <select name="role" class="form-control">
+                                                <option value="user">user</option>
+                                                <option value="admin">admin</option>
+                                                <option value="secretaire">secretaire</option>
+                                                <option value="moderateur">moderateur</option>
+                                            </select>
+                                        </div>
+                                     </div>
+                                     </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                   Close
@@ -204,11 +193,11 @@
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                            <img src="{{ asset($us->photo) }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">{{ $us->nom }}</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                            <p class="text-xs text-secondary mb-0">{{ $us->email }}</p>
                           </div>
                         </div>
                       </td>
@@ -216,9 +205,14 @@
                         <p class="text-xs font-weight-bold mb-0">{{ $us->login }}</p>
                         <p class="text-xs text-secondary mb-0">Organization</p>
                       </td>
+
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
+                            @if($us->actif)
+                            <span class="badge badge-sm bg-gradient-success">Online</span>
+                            @else
+                            <span class="badge badge-sm bg-gradient-danger">Offline</span>
+                            @endif
+                        </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">{{ $us->anneeEntree }}</span>
                       </td>

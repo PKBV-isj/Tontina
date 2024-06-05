@@ -159,7 +159,7 @@
         <div class="row gx-4 mb-2">
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-              <img src="../assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+              <img src="{{ asset($user->photo) }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
             </div>
           </div>
           <div class="col-auto my-auto">
@@ -367,7 +367,7 @@
                     <div class="card-body p-3">
                       <a href="javascript:;">
                         <h5>
-                          Modern
+                          5000 Xaf/Mois
                         </h5>
                       </a>
 

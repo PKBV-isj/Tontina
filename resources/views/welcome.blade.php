@@ -130,4 +130,5 @@
         @section('footer')
 
         @endsection
+        
 

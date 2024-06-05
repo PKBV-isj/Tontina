@@ -25,7 +25,9 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             // Connecter l'utilisateur
             $request->session()->regenerate();
-
+            $user = Auth::user();
+            $user->actif = true;
+            $user->save();
             // Rediriger l'utilisateur vers la page d'accueil ou une page sécurisée
             return redirect()->intended('');
         }

@@ -32,9 +32,22 @@ class ProfileController extends Controller
             'nomEpoux' => 'nullable|string|max:50',
             'telephone1' => 'nullable|string|max:15',
             'telephone2' => 'nullable|string|max:15',
-            'email' => 'nullable|email|max:255|unique:users,email',
+            'email' => 'nullable|email|max:255',
             'photo' => 'nullable|image|max:2048',
         ]);
+
+        /*$requestData = $request->all();
+        $fileName = time().$request->file('photo')->getClientOriginalName();
+        $path = $request->file('photo')->storeAs('images', $fileName, 'public');
+        $requestData['photos'] = '/storage/'.$path;*/
+
+
+        if ($request->hasFile('photo')) {
+            $requestData = $request->all();
+            $fileName = time().$request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->storeAs('images', $fileName, 'public');
+            $user->photo =  '/storage/'.$path;
+}
 
         $user->nom = $request->input('nom');
         $user->prenom = $request->input('prenom');
@@ -48,9 +61,7 @@ class ProfileController extends Controller
         $user->telephone2 = $request->input('telephone2');
         $user->email = $request->input('email');
 
-        if ($request->hasFile('photo')) {
-            $user->photo = $request->file('photo')->store('photos_Profile', 'public');
-        }
+
 
         $user->save();
 
